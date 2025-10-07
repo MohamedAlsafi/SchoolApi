@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Domain.Entites
 {
-    public class StudentSubject
+    public class StudentSubject : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
+        
         public int StudentID { get; set; }
         public int SubjectID { get; set; }
 

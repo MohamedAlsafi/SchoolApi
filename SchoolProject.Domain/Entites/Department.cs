@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Domain.Entites
 {
-    public class Department
+    public class Department : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
+     
+
         [StringLength(500)]
         public string Name { get; set; }
         public  ICollection<Student> Students { get; set; } = new HashSet<Student>();

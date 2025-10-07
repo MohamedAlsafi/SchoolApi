@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Domain.Entites
 {
-    public class Subject
+    public class Subject : BaseEntity
     {
-     
-        [Key]
-        public int ID { get; set; }
         [StringLength(500)]
         public string Name { get; set; }
         public DateTime Period { get; set; }

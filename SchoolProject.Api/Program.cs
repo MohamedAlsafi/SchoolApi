@@ -1,6 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Infrastructure.Data;
+using SchoolProject.Infrastructure;
+using SchoolProject.Services;
+
+
 
 namespace SchoolProject.Api
 {
@@ -18,6 +22,11 @@ namespace SchoolProject.Api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<SchoolDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            #region DenpendencyInjection
+            builder.Services.AddInfrastructureDependencies()
+                            .AddServicseDependencies();
+            #endregion
 
             var app = builder.Build();
 

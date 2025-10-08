@@ -12,4 +12,12 @@
     <ProjectReference Include="..\SchoolProject.Services\SchoolProject.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Students\Commands\Models\" />
+    <Folder Include="Features\Students\Commands\validators\" />
+    <Folder Include="Features\Students\Commands\Handelers\" />
+    <Folder Include="Features\Students\Queries\Handelers\" />
+    <Folder Include="Features\Students\Queries\Models\" />
+  </ItemGroup>
+
 </Project>

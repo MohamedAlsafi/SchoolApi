@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Infrastructure;
 using SchoolProject.Services;
+using SchoolProject.Core;
+
 
 
 
@@ -25,7 +27,8 @@ namespace SchoolProject.Api
 
             #region DenpendencyInjection
             builder.Services.AddInfrastructureDependencies()
-                            .AddServicseDependencies();
+                            .AddServicseDependencies()
+                            .AddCoreDependencies();
             #endregion
 
             var app = builder.Build();

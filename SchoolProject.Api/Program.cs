@@ -5,9 +5,6 @@ using SchoolProject.Infrastructure;
 using SchoolProject.Services;
 using SchoolProject.Core;
 
-
-
-
 namespace SchoolProject.Api
 {
     public class Program

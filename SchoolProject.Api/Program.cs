@@ -4,6 +4,7 @@ using SchoolProject.Infrastructure.Data;
 using SchoolProject.Infrastructure;
 using SchoolProject.Services;
 using SchoolProject.Core;
+using SchoolProject.Api.Middlewares;
 
 namespace SchoolProject.Api
 {
@@ -36,6 +37,7 @@ namespace SchoolProject.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

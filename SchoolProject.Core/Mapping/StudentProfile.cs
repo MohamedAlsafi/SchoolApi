@@ -15,6 +15,7 @@ namespace SchoolProject.Core.Mapping
         {
             CreateMap<Student,GetStudentListResponse>()
                 .ForMember(dst=>dst.DepartmentName,opt=> opt.MapFrom(src=>src.Department.Name));
+            ///
         }
     }
 }

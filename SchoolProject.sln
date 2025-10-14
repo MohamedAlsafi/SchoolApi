@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolProject.Api", "SchoolProject.Api\SchoolProject.Api.csproj", "{827E47AF-74CA-4EEC-9934-B3FB4F1F72A8}"
 EndProject
@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolProject.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolProject.Services", "SchoolProject.Services\SchoolProject.Services.csproj", "{788C14F1-6524-481D-822D-1DFDE2EC1FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolProject.Core", "SchoolProject.Core\SchoolProject.Core.csproj", "{2101E3D5-6182-4177-98B5-38005573CFB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolProject.Application", "SchoolProject.Core\SchoolProject.Application.csproj", "{2101E3D5-6182-4177-98B5-38005573CFB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Shared", "School.Shared\School.Shared.csproj", "{B3D45034-F345-400D-8555-93976A1F6C96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2101E3D5-6182-4177-98B5-38005573CFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2101E3D5-6182-4177-98B5-38005573CFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2101E3D5-6182-4177-98B5-38005573CFB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D45034-F345-400D-8555-93976A1F6C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D45034-F345-400D-8555-93976A1F6C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D45034-F345-400D-8555-93976A1F6C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D45034-F345-400D-8555-93976A1F6C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

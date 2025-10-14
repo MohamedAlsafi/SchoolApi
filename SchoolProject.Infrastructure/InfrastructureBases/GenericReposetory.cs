@@ -13,13 +13,15 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
 
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        protected readonly DbContext _context;
+       
         protected readonly DbSet<T> _dbSet;
+        private readonly SchoolDbContext _context;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(SchoolDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
+           
         }
 
         #region Reading

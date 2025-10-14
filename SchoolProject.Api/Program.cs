@@ -5,6 +5,7 @@ using SchoolProject.Infrastructure;
 using SchoolProject.Services;
 using SchoolProject.Core;
 using SchoolProject.Api.Middlewares;
+using School.Shared.Helper;
 
 namespace SchoolProject.Api
 {
@@ -31,6 +32,7 @@ namespace SchoolProject.Api
 
             var app = builder.Build();
 
+            AutoMapperExtensions.Configure(app.Services);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

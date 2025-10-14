@@ -9,6 +9,6 @@ namespace SchoolProject.Services.Abstract
 {
     public interface IStudentServices
     {
-        public Task<List<Student>> GetStudentsListasync(); 
+        public IQueryable<Student> GetStudentsQuery();
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using School.Shared.Helper;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Response;
 using SchoolProject.Domain.Entites;
@@ -15,20 +17,19 @@ namespace SchoolProject.Core.Features.Students.Queries.Handelers
     public class GetStudentListHandeler : IRequestHandler<GetStudentListQuery, List<GetStudentListResponse>>
     {
         private readonly IStudentServices _studentServices;
-        private readonly IMapper _mapper;
 
-        public GetStudentListHandeler(IStudentServices studentServices , IMapper mapper)
+
+        public GetStudentListHandeler(IStudentServices studentServices)
         {
             _studentServices = studentServices;
-            _mapper = mapper;
         }
         
 
         public async Task<List<GetStudentListResponse>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
-            var studentList = await _studentServices.GetStudentsListasync();
-            var studentListMapper = _mapper.Map<List<GetStudentListResponse>>(studentList);
-            return studentListMapper;
+            var studentQuery = _studentServices.GetStudentsQuery();
+            var studentList = await studentQuery.ProjectTo<GetStudentListResponse>().ToListAsync(cancellationToken);
+            return studentList;
         }
     }
 }

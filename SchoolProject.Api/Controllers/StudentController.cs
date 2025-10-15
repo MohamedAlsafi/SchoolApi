@@ -5,6 +5,7 @@ using School.Shared.Helper;
 using SchoolProject.Application.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using School.Shared;
+using SchoolProject.Application.Features.Students.Commands.Models;
 
 namespace SchoolProject.Api.Controllers
 {
@@ -32,6 +33,13 @@ namespace SchoolProject.Api.Controllers
             var response = await _mediator.Send(new GetStudentByIdQuery(id));
             return Ok(response);
         
+        }
+        [HttpPost(ApiRoutes.StudentRouting.Create)]
+        public async Task<IActionResult> CreateStudent (AddStudentCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+
         }
     }
 }

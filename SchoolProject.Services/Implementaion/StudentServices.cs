@@ -33,5 +33,17 @@ namespace SchoolProject.Services.Implementaion
         {
           return  _reposetory.GetAll().Where(s=>s.ID == id); 
         }
+
+        public async Task<string> AddStudent(Student student)
+        {
+            var studentResult = _reposetory.GetAllByCriteriaAsync(s => s.Name == student.Name).FirstOrDefault();
+            if (studentResult != null) return "Exist";
+
+            await  _reposetory.AddAsync(student);
+           await _reposetory.SaveChangesAsync();
+            return "Success";
+                
+            
+        }
     }
 }

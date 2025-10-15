@@ -18,6 +18,8 @@ namespace School.Shared.Helper
             public const string prifix = Root + "Student/";
             public const string List = prifix + "List";
             public const string GetById = prifix + SingleRoute;
+            public const string Create = prifix + "Create";
+
 
 
 

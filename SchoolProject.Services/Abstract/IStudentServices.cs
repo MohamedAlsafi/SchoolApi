@@ -13,5 +13,7 @@ namespace SchoolProject.Services.Abstract
 
         public IQueryable<Student> GetStudentById (int id); 
 
+        public Task<string> AddStudent (Student student);
+
     }
 }

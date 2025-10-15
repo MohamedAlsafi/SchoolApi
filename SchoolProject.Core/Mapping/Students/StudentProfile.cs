@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProject.Core.Mapping
+namespace SchoolProject.Application.Mapping.Students
 {
-    public class StudentProfile : Profile
+    public partial class StudentProfile : Profile
     {
         public StudentProfile()
         {
-            CreateMap<Student,GetStudentListResponse>()
-                .ForMember(dst=>dst.DepartmentName,opt=> opt.MapFrom(src=>src.Department.Name));
-            ///
+            GetStudentListMapping();
+
         }
     }
 }

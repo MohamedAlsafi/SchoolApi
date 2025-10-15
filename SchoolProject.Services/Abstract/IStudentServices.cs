@@ -10,5 +10,8 @@ namespace SchoolProject.Services.Abstract
     public interface IStudentServices
     {
         public IQueryable<Student> GetStudentsQuery();
+
+        public IQueryable<Student> GetStudentById (int id); 
+
     }
 }

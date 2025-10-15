@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SchoolProject.Application.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
 
 namespace SchoolProject.Api.Controllers
@@ -21,6 +22,14 @@ namespace SchoolProject.Api.Controllers
         {
             var response = await _mediator.Send(new GetStudentListQuery());
             return Ok(response);
+        }
+        [HttpGet("/student/{id}")]
+
+        public async Task<IActionResult> GetStudentById(int id) 
+        {
+            var response = await _mediator.Send(new GetStudentByIdQuery(id));
+            return Ok(response);
+        
         }
     }
 }

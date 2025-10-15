@@ -23,9 +23,15 @@ namespace SchoolProject.Services.Implementaion
         {
             _reposetory = reposetory;
         }
+
         public IQueryable<Student> GetStudentsQuery ()
         {
             return _reposetory.GetAll();
+        }
+
+        public IQueryable<Student> GetStudentById(int id)
+        {
+          return  _reposetory.GetAll().Where(s=>s.ID == id); 
         }
     }
 }

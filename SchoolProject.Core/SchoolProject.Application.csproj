@@ -17,7 +17,7 @@
     <Folder Include="Features\Students\Commands\Handelers\" />
     <Folder Include="Features\Students\Commands\Models\" />
     <Folder Include="Features\Students\Commands\validator\" />
-    <Folder Include="Mapping\Students\QueryMapping\" />
+    <Folder Include="Mapping\Students\CommandMapping\" />
   </ItemGroup>
 
   <ItemGroup>

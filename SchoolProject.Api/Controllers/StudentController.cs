@@ -28,15 +28,24 @@ namespace SchoolProject.Api.Controllers
         }
         [HttpGet(ApiRoutes.StudentRouting.GetById)]
 
-        public async Task<IActionResult> GetStudentById(int id) 
+        public async Task<IActionResult> GetStudentById(int Id) 
         {
-            var response = await _mediator.Send(new GetStudentByIdQuery(id));
+            var response = await _mediator.Send(new GetStudentByIdQuery(Id));
             return Ok(response);
         
         }
         [HttpPost(ApiRoutes.StudentRouting.Create)]
         public async Task<IActionResult> CreateStudent (AddStudentCommand command)
         {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+
+        }
+
+        [HttpPut(ApiRoutes.StudentRouting.Update)]
+        public async Task<IActionResult> UpdateStudent( int Id , UpdateStudentCommand command)
+        {
+            if (Id != command.ID) return BadRequest("ID missmatch");
             var response = await _mediator.Send(command);
             return Ok(response);
 

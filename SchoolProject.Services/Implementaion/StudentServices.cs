@@ -51,5 +51,15 @@ namespace SchoolProject.Services.Implementaion
           var exist = await  _reposetory.AnyAsync(x=>x.Name == name);
             return exist;
         }
+
+        public async Task UpdateIncludeAsync(Student student, params string[] modifiedProperties)
+        {
+         await  _reposetory.UpdateIncludeAsync(student, modifiedProperties);
+        }
+
+        public async Task<Student> GetById(int id)
+        {
+             return  await _reposetory.GetByIdAsync(id);
+        }
     }
 }

@@ -13,9 +13,14 @@ namespace SchoolProject.Services.Abstract
 
         public IQueryable<Student> GetStudentById (int id); 
 
+        public Task<Student> GetById (int id);  
+
         public Task<string> AddStudent (Student student);
 
         public Task<bool> CheckIfNameExistAsync (string name , CancellationToken cancellationToken = default);
+
+        public Task UpdateIncludeAsync(Student student, params string[] modifiedProperties);
+
 
     }
 }

@@ -25,8 +25,8 @@ namespace SchoolProject.Application.Features.Students.Commands.Handelers
         {
             var stutentMapping = request.Map<Student>();
             var result = await _services.AddStudent(stutentMapping);
-            if (result == "Exist") return BadRequest<string>("Name is Exist");
-            else return Created("Added Successfly");
+            //if (result == "Exist") return BadRequest<string>("Name is Exist");
+             return Created("Added Successfly");
         }
     }
 }

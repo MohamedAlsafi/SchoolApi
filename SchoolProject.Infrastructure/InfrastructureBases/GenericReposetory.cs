@@ -41,7 +41,8 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
             var query = asTracking ? _dbSet.AsQueryable() : _dbSet.AsNoTracking();
             return query.Where(criteria);
         }
-
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+        => await _dbSet.AnyAsync(predicate, cancellationToken);
 
         #endregion
 

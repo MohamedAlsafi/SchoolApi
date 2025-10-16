@@ -15,6 +15,8 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false);
         IQueryable<T> GetAllByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
+
 
         // Writing
         Task<T> AddAsync(T entity);

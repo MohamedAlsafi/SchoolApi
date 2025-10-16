@@ -36,14 +36,20 @@ namespace SchoolProject.Services.Implementaion
 
         public async Task<string> AddStudent(Student student)
         {
-            var studentResult = _reposetory.GetAllByCriteriaAsync(s => s.Name == student.Name).FirstOrDefault();
-            if (studentResult != null) return "Exist";
+            //var studentResult = _reposetory.GetAllByCriteriaAsync(s => s.Name == student.Name).FirstOrDefault();
+            //if (studentResult != null) return "Exist";
 
-            await  _reposetory.AddAsync(student);
+            await  _reposetory.AddAsync(student );
            await _reposetory.SaveChangesAsync();
             return "Success";
                 
             
+        }
+
+        public async Task<bool> CheckIfNameExistAsync(string name ,CancellationToken cancellationToken=default)
+        {
+          var exist = await  _reposetory.AnyAsync(x=>x.Name == name);
+            return exist;
         }
     }
 }

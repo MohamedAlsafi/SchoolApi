@@ -15,5 +15,7 @@ namespace SchoolProject.Services.Abstract
 
         public Task<string> AddStudent (Student student);
 
+        public Task<bool> CheckIfNameExistAsync (string name , CancellationToken cancellationToken = default);
+
     }
 }

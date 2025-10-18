@@ -103,8 +103,12 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
                 if (propertyInfo is not null)
                 {
                     var value = propertyInfo.GetValue(entity);
-                    entry.Property(prop).CurrentValue = value;
-                    entry.Property(prop).IsModified = true;
+
+                    if (value != null)
+                    {
+                        entry.Property(prop).CurrentValue = value;
+                        entry.Property(prop).IsModified = true;
+                    }
                 }
             }
 
@@ -123,13 +127,63 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
                 if (!unmodifiedProperties.Contains(prop.Metadata.Name))
                 {
                     var value = entity.GetType().GetProperty(prop.Metadata.Name)?.GetValue(entity);
-                    prop.CurrentValue = value;
-                    prop.IsModified = true;
+
+                    if (value != null)
+                    {
+                        prop.CurrentValue = value;
+                        prop.IsModified = true;
+                    }
                 }
             }
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateSmartAsync(T entity)
+        {
+            // ✅ 1. الحصول على الـ Key Property (المفتاح الأساسي)
+            var keyName = _context.Model.FindEntityType(typeof(T))
+                                        ?.FindPrimaryKey()
+                                        ?.Properties
+                                        ?.Select(x => x.Name)
+                                        ?.FirstOrDefault();
+
+            if (keyName == null)
+                throw new InvalidOperationException($"No primary key defined for {typeof(T).Name}");
+
+            // ✅ 2. الحصول على قيمة المفتاح
+            var keyProperty = typeof(T).GetProperty(keyName);
+            var keyValue = keyProperty?.GetValue(entity);
+            if (keyValue == null)
+                throw new ArgumentException($"Entity key value cannot be null for {typeof(T).Name}");
+
+            // ✅ 3. جلب الكيان الأصلي من قاعدة البيانات
+            var existingEntity = await _dbSet.FindAsync(keyValue);
+            if (existingEntity == null)
+                throw new KeyNotFoundException($"{typeof(T).Name} with key '{keyValue}' not found.");
+
+            // ✅ 4. المقارنة والتحديث فقط لما يكون فيه فرق أو قيمة جديدة
+            var entry = _context.Entry(existingEntity);
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (!prop.CanWrite) continue; // تخطي الخصائص اللي ملهاش setter
+
+                var newValue = prop.GetValue(entity);
+                var oldValue = prop.GetValue(existingEntity);
+
+                // 🔹 لو القيمة الجديدة مش null ومختلفة عن القديمة، حدثها
+                if (newValue != null && !Equals(newValue, oldValue))
+                {
+                    prop.SetValue(existingEntity, newValue);
+                    entry.Property(prop.Name).IsModified = true;
+                }
+            }
+
+            // ✅ 5. حفظ التغييرات
+            await _context.SaveChangesAsync();
+        }
+
+
 
         #endregion
 

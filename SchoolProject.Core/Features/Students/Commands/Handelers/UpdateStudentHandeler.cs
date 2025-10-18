@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using School.Shared.Helper;
 using SchoolProject.Application.Bases;
 using SchoolProject.Application.Features.Students.Commands.Models;
@@ -26,11 +27,14 @@ namespace SchoolProject.Application.Features.Students.Commands.Handelers
             var student = await _services.GetById(request.ID);
             if (student is null) return NotFound<string>("Student Id not Found");
 
+            if (request.DepartmentID == 0) request.DepartmentID = null;
+
             request.Map(student);
 
-            await _services.UpdateIncludeAsync(student, nameof(student.Name), nameof(student.Address), nameof(student.DepartmentID));
-        
-             return Created("Student Updated Successfly");
+            await _services.UpdateIncludeAsync(student, nameof(student.Name), nameof(student.Address), nameof(student.Phone), nameof(student.DepartmentID));
+            return Created("Student Updated Successfly");
+
+
         }
     }
 }

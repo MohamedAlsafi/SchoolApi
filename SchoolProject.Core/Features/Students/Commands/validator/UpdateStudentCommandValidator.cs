@@ -24,23 +24,31 @@ namespace SchoolProject.Application.Features.Students.Commands.validator
         {
 
             RuleFor(X => X.Name)
+
                 .NotEmpty().WithMessage("Name must Not be Empty ")
-                .MinimumLength(3).WithMessage("Minimum Length is 3 ");
+                .MinimumLength(3).WithMessage("Minimum Length is 3 ")
+                .When(x => !string.IsNullOrEmpty(x.Name) && x.Name != "string");
                
             RuleFor(x => x.Address)
-                .MaximumLength(30).WithMessage("Maximum Length is 30");
+                .MaximumLength(30).WithMessage("Maximum Length is 30")
+                .When(x => !string.IsNullOrEmpty(x.Address) && x.Address != "string");
+
 
             RuleFor(x => x.Phone)
-             .Matches(@"^\d{11}$").When(x => !string.IsNullOrEmpty(x.Phone))
-             .WithMessage("phone number must be 11 digits");
+             .Length(11)
+             .WithMessage("phone number must be 11 digits")
+             .When(x => !string.IsNullOrWhiteSpace(x.Phone) && x.Phone != "string");
+
 
             RuleFor(x => x.DepartmentID)
-                .GreaterThan(0).When(x => x.DepartmentID.HasValue)
-                .WithMessage("DepartmentId must be Greater than 0");
+             .GreaterThan(0)
+             .When(x => x.DepartmentID.HasValue && x.DepartmentID.Value != 0)
+             .WithMessage("DepartmentId must be greater than 0");
+
 
 
         }
 
-        
+
     }
 }

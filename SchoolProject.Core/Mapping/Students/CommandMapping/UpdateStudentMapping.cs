@@ -14,8 +14,15 @@ namespace SchoolProject.Application.Mapping.Students
         public void UpdateStudentMapping()
         {
             CreateMap<UpdateStudentCommand, Student>()
-                  .ForAllMembers(opts =>
-                     opts.Condition((src, dest, srcMember) => srcMember != null)); ;
+       .ForAllMembers(opt => opt.Condition((src, dest, srcMember, context) =>
+           srcMember switch
+           {
+               null => false, 
+               string s when string.IsNullOrWhiteSpace(s) || s == "string" => false, 
+               int i when i == 0 => false, 
+               _ => true 
+           }));
+
         }
     }
 }

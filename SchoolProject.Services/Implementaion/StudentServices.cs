@@ -28,6 +28,10 @@ namespace SchoolProject.Services.Implementaion
         {
             return _reposetory.GetAll();
         }
+        public async Task<Student> GetById(int id)
+        {
+            return await _reposetory.GetByIdAsync(id);
+        }
 
         public IQueryable<Student> GetStudentById(int id)
         {
@@ -55,11 +59,9 @@ namespace SchoolProject.Services.Implementaion
         public async Task UpdateIncludeAsync(Student student, params string[] modifiedProperties)
         {
          await  _reposetory.UpdateIncludeAsync(student, modifiedProperties);
+            await _reposetory.SaveChangesAsync();
         }
 
-        public async Task<Student> GetById(int id)
-        {
-             return  await _reposetory.GetByIdAsync(id);
-        }
+       
     }
 }

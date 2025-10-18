@@ -32,6 +32,7 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
         // Update control
         Task UpdateIncludeAsync(T entity, params string[] modifiedProperties);
         Task UpdateExcludeAsync(T entity, params string[] unmodifiedProperties);
+        Task UpdateSmartAsync(T entity);
 
         // Save
         Task SaveChangesAsync();

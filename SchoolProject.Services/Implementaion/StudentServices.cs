@@ -62,6 +62,12 @@ namespace SchoolProject.Services.Implementaion
             await _reposetory.SaveChangesAsync();
         }
 
-       
+        public async Task<string> DeleteStudent(Student student)
+        {
+             await _reposetory.SoftDeleteAsync(student);
+            await _reposetory.SaveChangesAsync();
+            return "Student Delete Succesfly";
+            
+        }
     }
 }

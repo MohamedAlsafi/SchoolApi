@@ -20,6 +20,8 @@ namespace School.Shared.Helper
             public const string GetById = prifix + SingleRoute;
             public const string Create = prifix + "Create";
             public const string Update = prifix + "Update";
+            public const string Delete = prifix + "Delete";
+
 
 
 

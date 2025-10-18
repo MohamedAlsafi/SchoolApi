@@ -27,7 +27,11 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
         #region Reading
 
         public IQueryable<T> GetAll(bool asTracking = false)
-            => asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTracking();
+        {
+            var query = asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTracking();
+            return query.Where(x => !x.Deleted);
+        }
+
 
         public async Task<T?> GetByIdAsync(int id)
             => await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.ID == id && !x.Deleted);

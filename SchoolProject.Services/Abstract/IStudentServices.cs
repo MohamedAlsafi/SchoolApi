@@ -21,6 +21,8 @@ namespace SchoolProject.Services.Abstract
 
         public Task UpdateIncludeAsync(Student student, params string[] modifiedProperties);
 
+        public Task<string> DeleteStudent(Student student);
+
 
     }
 }

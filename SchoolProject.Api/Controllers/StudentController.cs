@@ -26,6 +26,18 @@ namespace SchoolProject.Api.Controllers
             var response = await _mediator.Send(new GetStudentListQuery());
             return Ok(response);
         }
+
+        [HttpGet(ApiRoutes.StudentRouting.List)]
+        public async Task<IActionResult> GetStudentList(int pageNumber = 1, int pageSize = 5)
+        {
+            var response = await _mediator.Send(new GetStudentListQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            });
+            return Ok(response);
+        }
+
         [HttpGet(ApiRoutes.StudentRouting.GetById)]
 
         public async Task<IActionResult> GetStudentById(int Id) 

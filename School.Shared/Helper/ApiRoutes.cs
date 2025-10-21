@@ -11,6 +11,8 @@ namespace School.Shared.Helper
     {
         public const string Root = "Api/";
         public const string SingleRoute = "{Id}";
+        public const string Paginate = "Paginated";
+
 
 
         public static class StudentRouting
@@ -21,6 +23,8 @@ namespace School.Shared.Helper
             public const string Create = prifix + "Create";
             public const string Update = prifix + "Update";
             public const string Delete = prifix + "Delete";
+            public const string Paginated = prifix + Paginate;
+
 
 
 

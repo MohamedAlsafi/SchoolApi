@@ -11,9 +11,13 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Core.Features.Students.Queries.Models
 {
-    public class GetStudentListQuery : IRequest<Response<List<GetStudentListResponse>>>
+    public class GetStudentPaginatedQuery : IRequest<PaginatedResult<GetStudentListResponse>>
     {
-   
-    }
+        public int PageNumber { get; set; } = 1;
 
+        public int PageSize { get; set; } = 5;
+
+        public string? Search { get; set; }
+
+    }
 }

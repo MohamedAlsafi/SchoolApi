@@ -27,14 +27,11 @@ namespace SchoolProject.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet(ApiRoutes.StudentRouting.List)]
-        public async Task<IActionResult> GetStudentList(int pageNumber = 1, int pageSize = 5)
+        [HttpGet(ApiRoutes.StudentRouting.Paginated)]
+        public async Task<IActionResult> GetStudentPaginated([FromQuery] GetStudentPaginatedQuery paginatedQuery)
         {
-            var response = await _mediator.Send(new GetStudentListQuery
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize
-            });
+            var response = await _mediator.Send(paginatedQuery);
+           
             return Ok(response);
         }
 

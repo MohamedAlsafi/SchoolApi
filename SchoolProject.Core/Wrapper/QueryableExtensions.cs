@@ -67,15 +67,14 @@ namespace SchoolProject.Application.Wrapper
         }
 
 
-        public static IQueryable<T> ApplyFiltering<T>(this IQueryable<T> query, Dictionary<string, object?> filters)
+        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query, params Expression<Func<T, bool>>[] filters)
         {
-            if (filters == null || filters.Count == 0)
+            if (filters == null || filters.Length == 0)
                 return query;
 
             foreach (var filter in filters)
             {
-                if (filter.Value != null)
-                    query = query.Where(x => EF.Property<object>(x, filter.Key).Equals(filter.Value));
+                query = query.Where(filter);
             }
 
             return query;

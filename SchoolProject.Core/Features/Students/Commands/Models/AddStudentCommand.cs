@@ -11,6 +11,8 @@ namespace SchoolProject.Application.Features.Students.Commands.Models
 {
     public class AddStudentCommand : IRequest<Response<string>>
     {
+        public int Age { get; set; }
+
         public string Name { get; set; }
         
         public string? Address { get; set; }

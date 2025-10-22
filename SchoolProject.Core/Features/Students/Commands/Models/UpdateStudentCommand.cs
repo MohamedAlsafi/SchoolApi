@@ -11,6 +11,8 @@ namespace SchoolProject.Application.Features.Students.Commands.Models
 {
     public class UpdateStudentCommand : IRequest<Response<string>>
     {
+        public int Age { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
         

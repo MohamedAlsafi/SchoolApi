@@ -19,5 +19,9 @@ namespace SchoolProject.Core.Features.Students.Queries.Models
 
         public string? Search { get; set; }
 
+        public int? MinAge { get; set; }
+        public int? MaxAge { get; set; }
+
+
     }
 }

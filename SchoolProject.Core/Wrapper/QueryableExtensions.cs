@@ -67,14 +67,15 @@ namespace SchoolProject.Application.Wrapper
         }
 
 
-        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query, params Expression<Func<T, bool>>[] filters)
+        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query,params Expression<Func<T, bool>>?[] filters)
         {
-            if (filters == null || filters.Length == 0)
+            if (filters is null || filters.Length == 0)
                 return query;
 
             foreach (var filter in filters)
             {
-                query = query.Where(filter);
+                if (filter != null)
+                    query = query.Where(filter);
             }
 
             return query;

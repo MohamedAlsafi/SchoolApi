@@ -25,6 +25,12 @@ namespace SchoolProject.Application.Features.Students.Queries.Handelers
         {
             var studentQuery = _services.GetStudentsQuery();
 
+            studentQuery = studentQuery.ApplyFilter
+                (
+                   request.MinAge.HasValue ? x => x.Age >= request.MinAge.Value : null,
+                   request.MaxAge.HasValue ? x => x.Age <= request.MaxAge.Value : null
+                );
+
             var studentPaginate = await studentQuery.ProjectTo<GetStudentListResponse>()
                 .ApplySearch(request.Search,x=>x.Name ,x=>x.Address ,x=>x.DepartmentName)
                 .ToPaginatedListAsync(request.PageNumber,request.PageSize); 

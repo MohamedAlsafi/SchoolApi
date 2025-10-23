@@ -22,6 +22,9 @@ namespace SchoolProject.Core.Features.Students.Queries.Models
         public int? MinAge { get; set; }
         public int? MaxAge { get; set; }
 
+        public string? SortBy { get; set; }
+        public string? SortDirection { get; set; } = "asc";
+
 
     }
 }

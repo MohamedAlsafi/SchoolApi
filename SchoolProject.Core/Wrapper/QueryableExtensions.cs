@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace SchoolProject.Application.Wrapper
         }
 
 
-        public static IQueryable<T> ApplySearch<T>(this IQueryable<T> query,string? searchTerm,params Expression<Func<T, string>>[] searchableProperties)
+        public static IQueryable<T> ApplySearch<T>(this IQueryable<T> query, string? searchTerm, params Expression<Func<T, string>>[] searchableProperties)
         {
             if (string.IsNullOrWhiteSpace(searchTerm) || searchableProperties == null || searchableProperties.Length == 0)
                 return query;
@@ -67,7 +68,7 @@ namespace SchoolProject.Application.Wrapper
         }
 
 
-        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query,params Expression<Func<T, bool>>?[] filters)
+        public static IQueryable<T> ApplyFilter<T>(this IQueryable<T> query, params Expression<Func<T, bool>>?[] filters)
         {
             if (filters is null || filters.Length == 0)
                 return query;
@@ -82,19 +83,44 @@ namespace SchoolProject.Application.Wrapper
         }
 
 
-        public static IQueryable<T> ApplySorting<T>(this IQueryable<T> query, string? sortBy, string? direction = "asc")
+        public static IQueryable<T> ApplyOrder<T>(this IQueryable<T> query,string? sortBy,string? sortDirection = "asc")
         {
-            if (string.IsNullOrEmpty(sortBy))
+            if (string.IsNullOrWhiteSpace(sortBy))
                 return query;
 
-            bool descending = direction?.ToLower() == "desc";
+            var dir = (sortDirection ?? "asc").Trim().ToLowerInvariant();
+            if (dir != "asc" && dir != "desc") dir = "asc";
 
-            query = descending
-                ? query.OrderByDescending(x => EF.Property<object>(x, sortBy))
-                : query.OrderBy(x => EF.Property<object>(x, sortBy));
+            var entityType = typeof(T);
+            var parameter = Expression.Parameter(entityType, "x");
 
-            return query;
+            Expression propertyAccess = parameter;
+            Type currentType = entityType;
+
+            foreach (var propName in sortBy.Split('.'))
+            {
+                var prop = currentType.GetProperty(propName,
+                    BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                if (prop == null)
+                    return query; 
+
+                propertyAccess = Expression.MakeMemberAccess(propertyAccess, prop);
+                currentType = prop.PropertyType;
+            }
+
+            var orderByExp = Expression.Lambda(propertyAccess, parameter);
+
+            string methodName = dir == "desc" ? "OrderByDescending" : "OrderBy";
+
+            var resultExp = Expression.Call(
+                typeof(Queryable),
+                methodName,
+                new Type[] { entityType, currentType },
+                query.Expression,
+                Expression.Quote(orderByExp));
+
+            return query.Provider.CreateQuery<T>(resultExp);
         }
-    }
 
+    }
 }

@@ -6,6 +6,9 @@ using SchoolProject.Services;
 using SchoolProject.Core;
 using SchoolProject.Api.Middlewares;
 using School.Shared.Helper;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 namespace SchoolProject.Api
 {
@@ -30,9 +33,38 @@ namespace SchoolProject.Api
                             .AddCoreDependencies();
             #endregion
 
+            #region Localization
+            builder.Services.AddControllers()
+                            .AddDataAnnotationsLocalization();  
+            builder.Services.AddLocalization(opt =>
+            {
+                opt.ResourcesPath = "Resources";
+            });
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                List<CultureInfo> supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("de-DE"),
+                    new CultureInfo("fr-FR"),
+                    new CultureInfo("ar-EG")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+
+            #endregion
+
             var app = builder.Build();
 
+            var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
             AutoMapperExtensions.Configure(app.Services);
+            LZ.Configure(app.Services);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

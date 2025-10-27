@@ -52,7 +52,7 @@ namespace SchoolProject.Services.Implementaion
 
         public async Task<bool> CheckIfNameExistAsync(string name ,CancellationToken cancellationToken=default)
         {
-          var exist = await  _reposetory.AnyAsync(x=>x.Name == name);
+          var exist = await  _reposetory.AnyAsync(x=>x.NameEn == name);
             return exist;
         }
 

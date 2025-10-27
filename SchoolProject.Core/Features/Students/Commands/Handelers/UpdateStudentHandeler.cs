@@ -31,7 +31,7 @@ namespace SchoolProject.Application.Features.Students.Commands.Handelers
 
             request.Map(student);
 
-            await _services.UpdateIncludeAsync(student, nameof(student.Name), nameof(student.Address), nameof(student.Phone), nameof(student.DepartmentID));
+            await _services.UpdateIncludeAsync(student, nameof(student.NameEn), nameof(student.Address), nameof(student.Phone), nameof(student.DepartmentID));
             return Created("Student Updated Successfly");
 
 

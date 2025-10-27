@@ -1,4 +1,6 @@
-﻿using System;
+﻿using School.Shared.Helper;
+using School.Shared.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +15,13 @@ namespace SchoolProject.Application.Bases
         {
 
         }
-        public Response<T> Deleted<T>()
+        public Response<T> Deleted<T>(string Message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Deleted Successfully"
+                Message = Message == null ? LZ.Translate(SharedResourcesKeys.Deleted) : Message
             };
         }
         public Response<T> Success<T>(T entity, object Meta = null)
@@ -29,17 +31,17 @@ namespace SchoolProject.Application.Bases
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Added Successfully",
+                Message = LZ.Translate(SharedResourcesKeys.Success),
                 Meta = Meta
             };
         }
-        public Response<T> Unauthorized<T>()
+        public Response<T> Unauthorized<T>(string Message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.Unauthorized,
                 Succeeded = true,
-                Message = "UnAuthorized"
+                Message = Message == null ? LZ.Translate(SharedResourcesKeys.UnAuthorized) : Message
             };
         }
         public Response<T> BadRequest<T>(string Message = null)
@@ -48,9 +50,20 @@ namespace SchoolProject.Application.Bases
             {
                 StatusCode = System.Net.HttpStatusCode.BadRequest,
                 Succeeded = false,
-                Message = Message == null ? "Bad Request" : Message
+                Message = Message == null ? LZ.Translate(SharedResourcesKeys.BadRequest) : Message
             };
         }
+
+        public Response<T> UnprocessableEntity<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+                Succeeded = false,
+                Message = Message == null ? LZ.Translate(SharedResourcesKeys.UnprocessableEntity) : Message
+            };
+        }
+
 
         public Response<T> NotFound<T>(string message = null)
         {
@@ -58,7 +71,7 @@ namespace SchoolProject.Application.Bases
             {
                 StatusCode = System.Net.HttpStatusCode.NotFound,
                 Succeeded = false,
-                Message = message == null ? "Not Found" : message
+                Message = message == null ? LZ.Translate(SharedResourcesKeys.NotFound) : message
             };
         }
 
@@ -69,9 +82,10 @@ namespace SchoolProject.Application.Bases
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.Created,
                 Succeeded = true,
-                Message = "Created",
+                Message = LZ.Translate(SharedResourcesKeys.Created),
                 Meta = Meta
             };
         }
     }
 }
+

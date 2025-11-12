@@ -32,7 +32,7 @@ namespace SchoolProject.Application.Features.Students.Queries.Handelers
                 );
 
             var studentPaginate = await studentQuery.ProjectTo<GetStudentListResponse>()
-                .ApplySearch(request.Search,x=>x.Name ,x=>x.Address ,x=>x.DepartmentName)
+                .ApplySearch(request.Search,x=>x.NameEn, x => x.NameAr, x => x.Address ,x=>x.DepartmentName)
                 .ApplyOrder(request.SortBy,request.SortDirection)
                 .ToPaginatedListAsync(request.PageNumber,request.PageSize); 
             return studentPaginate;

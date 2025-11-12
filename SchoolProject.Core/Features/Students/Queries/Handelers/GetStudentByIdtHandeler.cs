@@ -38,5 +38,6 @@ namespace SchoolProject.Core.Features.Students.Queries.Handelers
             }
             return Success (studentMapping);
         }
+
     }
 }

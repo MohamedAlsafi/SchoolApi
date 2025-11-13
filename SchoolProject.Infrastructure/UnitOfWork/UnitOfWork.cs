@@ -1,0 +1,50 @@
+﻿using SchoolProject.Domain.Entites;
+using SchoolProject.Infrastructure.Data;
+using SchoolProject.Infrastructure.InfrastructureBases;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchoolProject.Infrastructure.UnitOfWork
+{
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly SchoolDbContext _dbContext;
+        private readonly Hashtable _repositories;
+        public UnitOfWork(SchoolDbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _repositories = new Hashtable();
+        }
+        public async Task<int> CompleteAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await _dbContext.DisposeAsync();
+        }
+
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+        {
+
+            var type = typeof(TEntity).Name;
+            if (!_repositories.ContainsKey(type))
+            {
+                var Repository = new GenericRepository<TEntity>(_dbContext);
+                _repositories.Add(type, Repository);
+
+            }
+            return _repositories[type] as IGenericRepository<TEntity>;
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+    }
+}

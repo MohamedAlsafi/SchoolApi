@@ -10,10 +10,10 @@ namespace SchoolProject.Domain.Entites
 {
     public class Ins_Subject : BaseEntity
     {   
-        public int instructorId { get; set; }
+        public int InstructorId { get; set; }
         public int SubjectId { get; set; }
 
-        [ForeignKey(nameof(instructorId))]
+        [ForeignKey(nameof(InstructorId))]
         public Instructor? instructor { get; set; }
 
         [ForeignKey(nameof(SubjectId))]

@@ -16,7 +16,5 @@ namespace SchoolProject.Domain.Entites
         public  ICollection<StudentSubject> StudentsSubjects { get; set; } = new HashSet<StudentSubject>();
         public  ICollection<DepartmentSubject> DepartmetsSubjects { get; set; } = new HashSet<DepartmentSubject>();
         public  ICollection<Ins_Subject> Ins_Subjects { get; set; } = new HashSet<Ins_Subject>();
-
-
     }
 }

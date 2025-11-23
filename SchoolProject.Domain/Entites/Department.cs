@@ -14,7 +14,7 @@ namespace SchoolProject.Domain.Entites
         [StringLength(500)]
         public string NameEn { get; set; }
         public string NameAr{ get; set; }
-        public int IsManger { get; set; }
+        public int? IsManger { get; set; }
 
         [ForeignKey(nameof(IsManger))]
         [InverseProperty(nameof(Instructor.DepartmentManaged))]

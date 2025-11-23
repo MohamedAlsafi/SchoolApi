@@ -34,13 +34,10 @@ namespace SchoolProject.Domain.Entites
         // collection of instructors who have this as Supervisor
         [InverseProperty(nameof(Instructor.Supervisor))]
         public ICollection<Instructor> Subordinates { get; set; } = new HashSet<Instructor>();
+        public  ICollection<Ins_Subject> Ins_Subjects { get; set; } = new HashSet<Ins_Subject>();
 
 
-    //    modelBuilder.Entity<Instructor>()
-    //.HasOne(i => i.Supervisor)
-    //.WithMany(i => i.Subordinates)
-    //.HasForeignKey(i => i.SupervisorId)
-    //.OnDelete(DeleteBehavior.Restrict);
+
 
     }
 }

@@ -10,7 +10,7 @@ namespace SchoolProject.Domain.Entites
 {
     public class StudentSubject : BaseEntity
     {
-        
+        public decimal? grade { get; set; }
         public int StudentID { get; set; }
         public int SubjectID { get; set; }
 

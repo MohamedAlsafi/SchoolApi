@@ -23,5 +23,7 @@ namespace SchoolProject.Domain.Entites
 
         [ForeignKey("DepartmentID")]
         public  Department Department { get; set; }
+
+        public ICollection<StudentSubject> StudentSubject { get; set; } = new HashSet<StudentSubject>();
     }
 }

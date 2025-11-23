@@ -12,10 +12,11 @@ namespace SchoolProject.Domain.Entites
         [StringLength(500)]
         public string NameEn { get; set; }
         public string NameAr { get; set; }
-        public DateTime Period { get; set; }
+        public int? Period { get; set; }
         public  ICollection<StudentSubject> StudentsSubjects { get; set; } = new HashSet<StudentSubject>();
         public  ICollection<DepartmentSubject> DepartmetsSubjects { get; set; } = new HashSet<DepartmentSubject>();
+        public  ICollection<Ins_Subject> Ins_Subjects { get; set; } = new HashSet<Ins_Subject>();
 
-       
+
     }
 }

@@ -24,13 +24,18 @@ namespace School.Shared.Helper
             public const string Update = prifix + "Update";
             public const string Delete = prifix + "Delete";
             public const string Paginated = prifix + Paginate;
+        }
 
 
-
-
-
-
-
+        public static class DepartmentRouting
+        {
+            public const string prifix = Root + "Department/";
+            public const string List = prifix + "List";
+            public const string GetById = prifix + SingleRoute;
+            public const string Create = prifix + "Create";
+            public const string Update = prifix + "Update";
+            public const string Delete = prifix + "Delete";
+            public const string Paginated = prifix + Paginate;
         }
     }
 

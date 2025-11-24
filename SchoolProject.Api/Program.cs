@@ -25,12 +25,15 @@ namespace SchoolProject.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<SchoolDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             #region DenpendencyInjection
             builder.Services.AddInfrastructureDependencies()
                             .AddServicseDependencies()
                             .AddCoreDependencies();
+
+            builder.Services.AddServiceRegistration(builder.Configuration);
+
+
             #endregion
 
             #region Localization

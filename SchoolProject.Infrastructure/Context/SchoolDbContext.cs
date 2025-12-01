@@ -5,12 +5,13 @@ using SchoolProject.Infrastructure.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SchoolProject.Infrastructure.Data
 {
-     public class SchoolDbContext : IdentityDbContext<ApplicationUser>
+     public class SchoolDbContext : IdentityDbContext<User>
     {
         public SchoolDbContext(DbContextOptions<SchoolDbContext> options) : base(options) { }
         public DbSet<Student> Students { get; set; }    
@@ -24,7 +25,8 @@ namespace SchoolProject.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SchoolDbContext).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(SchoolDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

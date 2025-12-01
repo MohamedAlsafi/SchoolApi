@@ -1,6 +1,4 @@
-﻿//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,30 +15,23 @@ namespace SchoolProject.Infrastructure
             services.AddDbContext<SchoolDbContext>(options =>
                     options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentityCore<ApplicationUser>(option =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
-                // Password settings.
-                option.Password.RequireDigit = true;
-                option.Password.RequireLowercase = true;
-                option.Password.RequireNonAlphanumeric = true;
-                option.Password.RequireUppercase = true;
-                option.Password.RequiredLength = 6;
-                option.Password.RequiredUniqueChars = 1;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
 
-                // Lockout settings.
-                option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                option.Lockout.MaxFailedAccessAttempts = 5;
-                option.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
 
-                // User settings.
-                option.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                option.User.RequireUniqueEmail = true;
-                option.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
+            })
+             .AddEntityFrameworkStores<SchoolDbContext>()
+             .AddDefaultTokenProviders();
 
-            }).AddEntityFrameworkStores<SchoolDbContext>()
-            .AddRoles<IdentityRole>()
-            .AddDefaultTokenProviders();
 
             return services;
         }

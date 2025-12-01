@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Infrastructure.Identity
 {
-    public class ApplicationUser : IdentityUser
+    public class User : IdentityUser
     {
         public string FullName { get; set; }
         public string? Address { get; set; }

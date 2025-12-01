@@ -12,6 +12,7 @@ namespace SchoolProject.Application.Mapping.Users
         public UserProfile()
         {
             AddUserMapping();
+            GetUserPaginationMapping();
         }
     }
 }

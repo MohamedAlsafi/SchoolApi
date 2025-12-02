@@ -14,7 +14,7 @@ namespace SchoolProject.Api.Controllers
         public AuthController(IMediator mediator) : base(mediator) { }
 
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(AddUserCommand command)
         {
             var result = await Mediator.Send(command);

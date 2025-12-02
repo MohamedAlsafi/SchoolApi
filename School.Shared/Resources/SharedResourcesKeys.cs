@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace School.Shared.Resources
@@ -31,6 +32,7 @@ namespace School.Shared.Resources
         public const string ChangePassFailed = "ChangePassFailed";
         public const string UserName = "UserName";
         public const string Password = "Password";
+        public const string PasswordChangedSuccessfully = "PasswordChangedSuccessfully";
         public const string UserNameIsNotExist = "UserNameIsNotExist";
         public const string PasswordNotCorrect = "PasswordNotCorrect";
 

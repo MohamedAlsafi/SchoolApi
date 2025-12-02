@@ -210,6 +210,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>Password Changed Successfully</value>
+  </data>
   <data name="PasswordNotCorrect" xml:space="preserve">
     <value>Password is Not Correct</value>
   </data>

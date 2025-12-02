@@ -210,6 +210,9 @@
   <data name="Password" xml:space="preserve">
     <value>الباسورد</value>
   </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>تم تغيير كلمه المرور بنجاح </value>
+  </data>
   <data name="PasswordNotCorrect" xml:space="preserve">
     <value>هذا الباسورد غير صحيح</value>
   </data>

@@ -13,6 +13,7 @@ namespace SchoolProject.Application.Mapping.Users
         {
             AddUserMapping();
             GetUserPaginationMapping();
+            GetUserByIdMapping();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using SchoolProject.Application.Bases;
 using SchoolProject.Application.Features.Users.Queries.Dtos;
-using SchoolProject.Application.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Application.Features.Users.Queries.Model
 {
-    public class GetUserPaginationQuery : IRequest<PaginatedResult<GetUserPaginationDto>>
+    public class GetUserByIdQuery : IRequest<Response<GetUserByIdDto>>
     {
-        public int PageNumber { get; set; } 
-        public int PageSize { get; set; }
-
-        public string? Search { get; set; }
+        public string Id { get; set; }
+        public GetUserByIdQuery(string id)
+        {
+            Id = id;
+        }
     }
 }

@@ -6,6 +6,7 @@ using School.Shared.Helper;
 using SchoolProject.Application.Features.Users.Command.Dtos;
 using SchoolProject.Application.Features.Users.Command.Model;
 using SchoolProject.Application.Features.Users.Queries.Model;
+using System.Security.Claims;
 
 namespace SchoolProject.Api.Controllers
 {
@@ -58,6 +59,34 @@ namespace SchoolProject.Api.Controllers
 
             return Ok(response);
         }
+
+        //[HttpPut(ApiRoutes.UserRouting.ChangePassword)]
+        //public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequestDto dto)
+        //{
+          
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    if (string.IsNullOrEmpty(userId))
+        //        return Unauthorized();
+
+           
+        //    var command = new ChangeUserPasswordCommand
+        //    {
+        //        Id = userId,
+        //        CurrentPassword = dto.CurrentPassword,
+        //        NewPassword = dto.NewPassword,
+        //        ConfirmPassword = dto.ConfirmPassword
+        //    };
+
+        //    var response = await Mediator.Send(command);
+
+           
+        //    if (!response.Succeeded)
+        //    {
+        //        if (response.StatusCode == 404) return NotFound(response);
+        //        return BadRequest(response);
+        //    }
+        //    return Ok(response);
+        //}
 
     }
 }

@@ -15,6 +15,7 @@ namespace SchoolProject.Services
 
             services.AddScoped<IStudentServices, StudentServices>();
             services.AddScoped<IDepartementService, DepartmentServices>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
 
             return services;
         }

@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SchoolProject.Application.Features.Authentication.Command.Model;
 using SchoolProject.Application.Features.Users.Command.Model;
 
 namespace SchoolProject.Api.Controllers
@@ -9,7 +11,6 @@ namespace SchoolProject.Api.Controllers
     [ApiController]
     public class AuthController : AppControllerBase
     {
-        private readonly IMediator _mediator;
 
         public AuthController(IMediator mediator) : base(mediator) { }
 
@@ -19,6 +20,13 @@ namespace SchoolProject.Api.Controllers
         {
             var result = await Mediator.Send(command);
             return NewResult(result);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginCommand query)
+        {
+            var response = await Mediator.Send(query);
+            return Ok(response);
         }
     }
 }

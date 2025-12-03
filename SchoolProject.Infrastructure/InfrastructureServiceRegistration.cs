@@ -1,10 +1,17 @@
 ﻿
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using School.Shared.AuthHelper;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Infrastructure.Identity;
+using System.Net.Sockets;
+using System.Text;
 
 namespace SchoolProject.Infrastructure
 {
@@ -31,6 +38,40 @@ namespace SchoolProject.Infrastructure
             })
              .AddEntityFrameworkStores<SchoolDbContext>()
              .AddDefaultTokenProviders();
+
+            //Jwt Settinngs
+            var jwtSettings = new JwtSettings();
+            config.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
+            services.AddSingleton(jwtSettings);
+
+            services.Configure<JwtSettings>(config.GetSection(nameof(JwtSettings)));
+
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+        .AddJwtBearer(opt =>
+        {
+            opt.RequireHttpsMetadata = true;
+            opt.SaveToken = true;
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
+
+            opt.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = jwtSettings.ValidateIssuer,
+                ValidateAudience = jwtSettings.ValidateAudience,
+                ValidateLifetime = jwtSettings.ValidateLifetime,
+                ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
+
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = key,
+            };
+        });
+
 
 
             return services;

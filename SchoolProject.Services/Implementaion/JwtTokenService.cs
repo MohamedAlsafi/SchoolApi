@@ -36,10 +36,14 @@ namespace SchoolProject.Services.Implementaion
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.UserName ?? ""),
             new Claim(ClaimTypes.Email, user.Email ?? ""),
-            new Claim(ClaimTypes.StreetAddress,user.Address??"")
+            new Claim(ClaimTypes.StreetAddress,user.Address??""),
+
         };
+          
 
             // Add roles
+
+
             foreach (var role in roles)
                 claims.Add(new Claim(ClaimTypes.Role, role));
 

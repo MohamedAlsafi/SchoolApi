@@ -36,16 +36,15 @@ namespace SchoolProject.Application.Features.Authentication.Command.Handler
                 return Unauthorized<LoginResponseDto>(LZ.Translate(SharedResourcesKeys.UserNameIsNotExist));
             }
 
-            // Check password (uses lockout if configured)
-            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password,false);
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             if (!signInResult.Succeeded)
             {
                 return Unauthorized<LoginResponseDto>(LZ.Translate(SharedResourcesKeys.PasswordNotCorrect));
             }
 
             // Get roles
-            var roles = await _userManager.GetRolesAsync(user);
-
+            //var roles = await _userManager.GetRolesAsync(user);
+            var roles = new[] { "Admin", "User" };
             // Create token
             var token = _jwtTokenService.GenerateToken(user, roles);
             var expiry = _jwtTokenService.GetExpiryUtc();

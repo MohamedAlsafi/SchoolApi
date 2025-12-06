@@ -23,10 +23,10 @@ namespace SchoolProject.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginCommand query)
+        public async Task<IActionResult> Login(  LoginCommand command)
         {
-            var response = await Mediator.Send(query);
-            return Ok(response);
+            var response = await Mediator.Send(command);
+            return NewResult(response);
         }
     }
 }

@@ -6,6 +6,7 @@ using SchoolProject.Application.Features.Students.Queries.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using School.Shared;
 using SchoolProject.Application.Features.Students.Commands.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolProject.Api.Controllers
 {
@@ -27,6 +28,7 @@ namespace SchoolProject.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpGet(ApiRoutes.StudentRouting.Paginated)]
         public async Task<IActionResult> GetStudentPaginated([FromQuery] GetStudentPaginatedQuery paginatedQuery)
         {
@@ -34,9 +36,8 @@ namespace SchoolProject.Api.Controllers
            
             return Ok(response);
         }
-
         [HttpGet(ApiRoutes.StudentRouting.GetById)]
-
+    
         public async Task<IActionResult> GetStudentById(int Id) 
         {
             var response = await _mediator.Send(new GetStudentByIdQuery(Id));

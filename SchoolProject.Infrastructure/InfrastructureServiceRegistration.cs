@@ -34,7 +34,7 @@ namespace SchoolProject.Infrastructure
                 options.Lockout.MaxFailedAccessAttempts = 5;
 
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
             })
              .AddEntityFrameworkStores<SchoolDbContext>()
              .AddDefaultTokenProviders();
